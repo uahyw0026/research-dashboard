@@ -1,0 +1,96 @@
+SQL> alter user risdash account unlock;
+
+User altered.
+
+SQL> grant create view to risdash;
+
+Grant succeeded.
+
+SQL> grant create procedure to risdash;
+
+Grant succeeded.
+
+SQL> set linesize 132
+SQL> set pagesize 999
+SQL> select privilege from dba_sys_privs where grantee = 'RISDASH';
+
+PRIVILEGE
+----------------------------------------
+ON COMMIT REFRESH
+CREATE VIEW
+CREATE SESSION
+CREATE PROCEDURE
+
+SQL> grant select on FGBTRNH;
+grant select on FGBTRNH
+                      *
+ERROR at line 1:
+ORA-00905: missing keyword
+
+
+SQL> grant select on FGBTRNH to risdash;
+
+Grant succeeded.
+
+SQL> grant select on FGBTRND to risdash;
+
+Grant succeeded.
+
+SQL> grant select on FRRGRPI to risdash;
+
+Grant succeeded.
+
+SQL> grant select on FRBGRNT to risdash;
+
+Grant succeeded.
+
+SQL> grant select on FTVACCT to risdash;
+
+Grant succeeded.
+
+SQL> grant select on FTVFUND to risdash;
+
+Grant succeeded.
+
+SQL> grant select on FTVSDAT to risdash;
+
+Grant succeeded.
+
+SQL> grant select on FTVSDAT to risdash;
+
+Grant succeeded.
+
+SQL> grant select on FTVSDAT to risdash;
+
+Grant succeeded.
+
+SQL> grant select on NHRDIST to risdash;
+
+Grant succeeded.
+
+SQL> grant select on SPRIDEN to risdash;
+
+Grant succeeded.
+
+SQL> grant select on SPRIDEN to risdash;
+
+Grant succeeded.
+
+SQL> GRANT CREATE MATERIALIZED VIEW TO risdash;
+
+Grant succeeded.
+
+SQL> grant create table to risdash;
+
+Grant succeeded.
+
+SQL> alter user risdash QUOTA UNLIMITED ON USERS;
+
+User altered.
+
+SQL> select DEFAULT_TABLESPACE from dba_users where username = 'RISDASH';
+
+DEFAULT_TABLESPACE
+------------------------------
+USERS
+

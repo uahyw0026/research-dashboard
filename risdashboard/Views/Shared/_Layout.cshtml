@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Research Dashboard</title>
+    <link href=@Url.Content("~/Content/bootstrap.min.css") rel="stylesheet" />
+    <link href=@Url.Content("~/Content/datatables.min.css") rel="stylesheet" />
+    <link href=@Url.Content("~/Content/buttons.dataTables.min.css") rel="stylesheet" />
+    <link href=@Url.Content("~/Content/Site.css") rel="stylesheet" />
+   
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand uah_logo">Research Dashboard</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <div class="col-lg-12 row">
+            <hr />
+            <footer>
+                <h6>
+                    &nbsp;<a class="sub_navtext" href="http://www.uah.edu">
+                        The University of
+                        Alabama in Huntsville
+                    </a> |Office of the Vice President for Research And Economic Development | Huntsville, Alabama 35899 | (256)
+                    824-6100
+                </h6>
+            </footer>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src=@Url.Content("~/scripts/jquery-3.4.1.min.js")></script>
+    <script src=@Url.Content("~/Scripts/bootstrap.js")></script>
+    <script src=@Url.Content("~/Scripts/dataTables.min.js")></script>
+    <script src=@Url.Content("~/Scripts/dataTables.bootstrap.min.js")></script>
+
+    <script src=@Url.Content("~/Scripts/dataTables.buttons.min.js")></script>
+    <script src=@Url.Content("~/Scripts/buttons.flash.min.js")></script>
+    <script src=@Url.Content("~/Scripts/jszip.min.js")></script>
+    <script src=@Url.Content("~/Scripts/pdfmake.min.js")></script>
+    <script src=@Url.Content("~/Scripts/vfs_fonts.js")></script>
+    <script src=@Url.Content("~/Scripts/buttons.html5.min.js")></script>
+    <script src=@Url.Content("~/Scripts/buttons.print.min.js")></script>
+
+    <!--script src=@Url.Content("~/Scripts/scripts.min.js")></script-->
+
+    <!--@Scripts.Render("~/bundles/jquery")-->
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/researchdb.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+<script>
+    $(document).ready(
+    function () {
+        $('#RDBAwardsTable').DataTable( {
+			"dom": '<"top"Bf>rt<"bottom"lip><"clear">',
+			buttons: [
+				'copy', 'csv', 'excel', 
+				{
+		                    extend: 'pdfHtml5',
+                		    orientation: 'landscape',
+		                    pageSize: 'LEGAL'
+                		},
+				'print'
+            ],
+            "columnDefs": [
+                { targets: [6, 7, 8, 9, 10, 11, 12], className: "dt-right"},
+                { targets: [1], className: "dt-left"}
+            ],
+            "lengthMenu": [[4, 10, 20, 40, -1],[4, 10, 20, 40, "All"]],
+            "pageLength": 4
+        });
+        $('#RDBAwardEndsTable').DataTable( {
+			"dom": '<"top"Bf>rt<"bottom"lip><"clear">',
+			buttons: [
+				'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            "lengthMenu": [[4, 10, 20, 40, -1],[4, 10, 20, 40, "All"]],
+            "pageLength": 4
+        });
+        $('#RDBFundsTable').DataTable({
+            "dom": '<"top"Bf>rt<"bottom"lip><"clear">',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            "columnDefs": [
+                { targets: [4], className: "dt-right"},
+                { targets: [3], className: "dt-left", width: "20%" }
+            ],
+            "lengthMenu": [[10, 20, 40, -1], [10, 20, 40, "All"]],
+            "pageLength": 10
+        });
+        $('#RDBFundsTableAll').DataTable({
+            "dom": '<"top"Bf>rt<"bottom"lip><"clear">',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            "columnDefs": [
+                { targets: [4,5,6,7], className: "dt-right" },
+                { targets: [3], className: "dt-left", width: "20%" }
+            ],
+            "lengthMenu": [[10, 20, 40, -1], [10, 20, 40, "All"]],
+            "pageLength": 10
+        });
+        $('#RDBAccountsTable').DataTable({
+            "dom": '<"top"Bf>rt<"bottom"lip><"clear">',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            "columnDefs": [
+                { targets: [3], className: "dt-right", width: "6%" },
+                { targets: [2], className: "dt-left", width: "20%" },
+                { targets: [4,5], className: "dt-right", width: "10%" }
+            ],
+            "lengthMenu": [[10, 20, 40, -1], [10, 20, 40, "All"]],
+            "pageLength": 10
+        });
+
+        $("#get_dean_user").click(function (e) {
+            e.preventDefault();
+            var anumber = $('#anumber').val();
+            var url = '@Url.Action("GetUserName", "Admin")';
+            console.log(anumber);
+            $.get(url, { cwid: anumber }, function (data) {
+                if (data == null ) {
+                    console.log("Error for getting user info");
+                    $('#username').val('');
+                    $('#userpidm').val('');
+                }
+                else {
+                    console.log(data);
+                    $('#username').val(data.UserName);
+                    $('#userpidm').val(data.Pidm);
+                }
+            });
+        });
+        $('#RDBProposalsTable').DataTable({
+            "dom": '<"top"Bf>rt<"bottom"lip><"clear">',
+            buttons: [
+                'copy', 'csv', 'excel',
+                {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL'
+                },
+                'print'
+            ],
+            "columnDefs": [
+                { targets: [6, 7, 8, 9], className: "dt-right" },
+                { targets: [3, 4], className: "dt-left" }
+            ],
+            "lengthMenu": [[4, 10, 20, 40, -1], [4, 10, 20, 40, "All"]],
+            "pageLength": 4
+        });
+    }
+);
+</script>

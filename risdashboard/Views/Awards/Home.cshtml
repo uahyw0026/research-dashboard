@@ -1,0 +1,89 @@
+﻿
+@model risdashboard.Models.AwardViewModel
+@{
+    ViewBag.Title = "Award";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.user.isPI() && Model.user.CurrentRole == "PI")
+{
+    Html.RenderPartial("_Navigation", Model.user);
+
+    <div class="row uah_data_section">
+        @if (Model.Awards != null && Model.Awards.Count > 0)
+        {
+            <h3>Proposals submitted </h3>
+            Html.RenderPartial("_Proposals", Model);
+        }
+        else
+        {
+            <br />
+            <h3> No Proposal submitted by @Model.user.getUserName()</h3>
+            <br />
+        }
+    </div>
+    <br />
+    <br />
+
+    <div class="row uah_data_section">
+        @if (Model.Awards != null && Model.Awards.Count > 0)
+        {
+            <h3>Awards granted</h3>
+            Html.RenderPartial("_Awards", Model);
+        }
+        else
+        {
+            <br />
+            <h3> No Award are granted to @Model.user.getUserName()</h3>
+            <br />
+        }
+    </div>
+    <br />
+    <br />
+
+    <div class="row uah_data_section">
+        @if (Model.Awards != null && Model.Awards.Count > 0)
+        {
+            <h3>Funding expenditure for @Model.user.getUserName()</h3>
+            Html.RenderPartial("_Grants", Model);
+        }
+        else
+        {
+            <br />
+            <h3> No Active Funding for @Model.user.getUserName()</h3>
+            <br />
+        }
+    </div>
+    <br />
+    <br />
+
+    <!--
+    <div class="row">
+        <div class="uah_data_section col-md-8">
+            @if (Model.AwardEnds != null && Model.AwardEnds.Count > 0)
+            {
+                Html.RenderPartial("_GrantsEnd", Model);
+            }
+            else
+            {
+                <br />
+                <h3> No Grant Award for @Model.user.getUserName() Ends within 120 days</h3>
+                <br />
+            }
+        </div>
+
+        <div class="uah_data_section col-md-4">
+            <h3>Notes and Policies</h3>
+            <br />
+            <iframe src="~/notes.html" frameBorder="0"></iframe>
+        </div>
+    </div>
+    -->
+}
+else
+{
+    <div class="row uah_data_section">
+        <h2>You don't have privilege to access Research Dashboard website. Please contact administrator if there is issue.</h2>
+    </div>
+}
+

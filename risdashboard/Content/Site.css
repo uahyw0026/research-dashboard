@@ -1,0 +1,89 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.navbar-inverse {
+    background-color: #0077C8;
+    border-color: #0077C8;
+}
+
+    .navbar-inverse .navbar-brand {
+        color: #fff;
+    }
+
+    .navbar-inverse .navbar-nav > li > a {
+        color: #fff;
+    }
+
+.navbar-brand {
+    padding-left: 100px;
+}
+
+.isa_info, .isa_success, .isa_warning, .isa_error {
+    margin: 10px 0px;
+    padding: 12px;
+}
+
+.isa_info {
+    color: #00529B;
+    background-color: #BDE5F8;
+}
+
+.isa_success {
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}
+
+.isa_warning {
+    color: #9F6000;
+    font-size-adjust: 0.58;
+    background-color: #FDDA24;
+}
+
+.isa_error {
+    color: #D8000C;
+    background-color: #FFD2D2;
+}
+
+    .isa_info i, .isa_success i, .isa_warning i, .isa_error i {
+        margin: 10px 22px;
+        font-size: 2em;
+        vertical-align: middle;
+    }
+
+.uah_data_section {
+    background-color: #fff;
+    margin-top: -9px;
+    margin-bottom: -9px;
+}
+
+.uah_logo {
+    background-image: url(images/uah_logo.png);
+    background-repeat: no-repeat;
+}
+
+.uah_button {
+    margin-left: -9px;
+    margin-right: -9px;
+}

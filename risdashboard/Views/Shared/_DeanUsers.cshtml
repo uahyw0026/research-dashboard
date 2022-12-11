@@ -1,0 +1,73 @@
+﻿@model risdashboard.Models.AdminViewModel
+
+<h3>Manage User For Accessing School Grants</h3>
+<table id="DeanUsersTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>A-Number</th>
+            <th>Dean User Name</th>
+            <th>Orgn Code</th>
+            <th>Orgn DESC</th>
+            <th>Created By</th>
+            <th>Update Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Deans)
+        {
+            <tr>
+                <td>
+                    @item.CWID
+                </td>
+                <td>
+                    @item.UserName
+                </td>
+                <td>
+                    @item.Orgn
+                </td>
+                <td>
+                    @item.OrgnDesc
+                </td>
+                <td>
+                    NA
+                </td>
+                <td>@item.UpdateDate</td>
+                <td>
+                    @Html.ActionLink(
+                           linkText: "DELETE",
+                           actionName: "DeanUserDelete",
+                           controllerName: "Admin",
+                           routeValues: new
+                           {
+                               pidm = item.PIDM,
+                               orgn = item.Orgn
+                           },
+                           htmlAttributes: null
+                           )
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>
+    @Html.ActionLink(
+        linkText: "Create User to Access Grants at School Level",
+        actionName: "DeanUserCreate",
+        controllerName: "Admin",
+        routeValues: null,
+        htmlAttributes: null
+    )
+</h3>
+
+<h3>
+    @Html.ActionLink(
+        linkText: "Check Materialized View Status",
+        actionName: "MVRefreshStatus",
+        controllerName: "Admin",
+        routeValues: null,
+        htmlAttributes: null
+    )
+</h3>
+

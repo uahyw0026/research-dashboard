@@ -1,0 +1,42 @@
+﻿
+@model risdashboard.Models.UserModel
+@{
+    string primaryButtonindicator_PI = (Model.CurrentRole == "PI" ? "btn-primary" : "");
+    string primaryButtonindicator_Dean = (Model.CurrentRole == "Dean" ? "btn-primary" : "");
+    string primaryButtonindicator_Admin = (Model.CurrentRole == "Admin" ? "btn-primary" : "");
+
+    <div class="row uah_data_section">
+        <h2>Welcome to Research Dashboard of University of Alabama in Huntsville!</h2>
+    </div>
+    <br />
+    <br />
+    <div class="row uah_data_section">
+        @if (Model.isPI())
+        {
+            <div class="col-md-4 uah_button">
+                @Html.ActionLink("Grants for " + Model.getUserName(), "Home", "Awards", null, new { @class = "btn btn-block btn_lg " + @primaryButtonindicator_PI })
+            </div>
+        }
+        @if (Model.isDean())
+        {
+            if (Model.CurrentRole == "Admin")
+            {
+                <div class="col-md-4 uah_button">
+                    @Html.ActionLink("View Grants at School Level", "Index", "Dean", null, new { @class = "btn btn-block btn_lg " + primaryButtonindicator_Dean })
+                </div>
+            }
+            else
+            {
+                <div class="col-md-4 uah_button">
+                    @Html.ActionLink("View Grants at School Level", "Index", "Dean", null, new { @class = "btn btn-block btn_lg " + primaryButtonindicator_Dean })
+                </div>
+            }
+        }
+        @if (Model.isAdmin())
+        {
+            <div class="col-md-4 uah_button">
+                @Html.ActionLink("Administration Management", "Index", "Admin", null, new { @class = "btn btn-block btn_lg " + primaryButtonindicator_Admin })
+            </div>
+        }
+    </div>
+}

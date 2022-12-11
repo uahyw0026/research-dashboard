@@ -1,0 +1,49 @@
+﻿@model risdashboard.Models.AdminViewModel
+
+<h3>Create User to Access Grants at School Level</h3>
+@using (Html.BeginForm("DeanUserCreate", "Admin", FormMethod.Post, new { id = "DeanUserCreateForm", enctype = "multipart/form-data" }))
+{
+    <table cellpadding="0" cellspacing="0">
+        <tr>
+            <td>@Html.LabelFor(m => m.NewDean.CWID) </td>
+            <td></td>
+            <td>@Html.TextBoxFor(m => m.NewDean.CWID, new { id = "anumber" })</td>
+            <td>@Html.ValidationMessageFor(m => m.NewDean.CWID)</td>
+            <td><input id="get_dean_user" type="submit" value="Get User Info" name="get_dean_user" class="btn btn-primary" /></td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.NewDean.UserName) </td>
+            <td></td>
+            <td>@Html.TextBoxFor(m => m.NewDean.UserName, new { id = "username", @readonly = "readonly" })</td>
+            <td>@Html.ValidationMessageFor(m => m.NewDean.UserName)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(m => m.NewDean.Pidm) </td>
+            <td></td>
+            <td>@Html.TextBoxFor(m => m.NewDean.Pidm, new { id = "userpidm", @readonly = "readonly" })</td>
+            <td>@Html.ValidationMessageFor(m => m.NewDean.Pidm)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td> @Html.LabelFor(m => m.NewDean.Orgn) </td>
+            <td></td>
+            <td>
+                @Html.DropDownListFor(m => m.NewDean.Orgn, (SelectList)Model.Orgns)
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><input id="create_dean_user" type="submit" value="Submit" name="create_dean_user" class="btn btn-primary" /></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+}
+
+
+
+

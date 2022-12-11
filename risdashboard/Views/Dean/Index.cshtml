@@ -1,0 +1,58 @@
+﻿@model risdashboard.Models.AwardViewModel
+@{
+    ViewBag.Title = "Dean";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.user.CurrentRole == "Dean")
+{
+    Html.RenderPartial("_Navigation", Model.user);
+
+    if (Model.user.isDean() || Model.user.isAdmin())
+    {
+        <div class="row uah_data_section">
+            <h3>Grant Awards at School Level for @Model.user.getUserName()</h3>
+            @if (Model.Awards != null && Model.Awards.Count > 0)
+            {
+                Html.RenderPartial("_Grants", Model);
+            }
+            else if (ViewBag.Reportstatus != null)
+            {
+                @ViewBag.Reportstatus
+            }
+        </div>
+        <br />
+        <br />
+
+        <div class="row">
+            <div class="uah_data_section col-md-8">
+                @if (Model.AwardEnds != null && Model.AwardEnds.Count > 0)
+                {
+                    Html.RenderPartial("_GrantsEnd", Model);
+                }
+                else
+                {
+                    <div class="col-md-6">
+                        <h3> No Grant Award at school level for @Model.user.getUserName() Ends within 120 days</h3>
+                    </div>
+                }
+            </div>
+
+            <div class="uah_data_section col-md-4">
+                <h3>Notes and Policies</h3>
+                <br />
+                <br />
+                <iframe src="~/schoolnotes.html" frameBorder="0"></iframe>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="row uah_data_section">
+        <h2>You don't have privilege to access Research Dashboard website. Please contact administrator if there is issue.</h2>
+    </div>
+}
+
+
+

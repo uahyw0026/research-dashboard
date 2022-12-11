@@ -1,0 +1,110 @@
+﻿
+@model risdashboard.Models.FundViewModel
+@{
+    ViewBag.Title = "Fund";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.user.isPI() || Model.user.isDean() || Model.user.isAdmin())
+{
+    Html.RenderPartial("_Navigation", Model.user);
+
+    <div class="row uah_data_section">
+        @if (Model.Funds != null && Model.Funds.Count > 0)
+        {
+            string fund_code = Model.Funds[0].FUND;
+            if (Model.detail == "all")
+            {
+                <h3> Details for FUND @fund_code</h3>
+            }
+            else if (Model.detail == "budget")
+            {
+                <h3> Budget for FUND @fund_code</h3>
+            }
+            else if (Model.detail == "expense")
+            {
+                <h3> Expenses for FUND @fund_code</h3>
+            }
+            else if (Model.detail == "encumbrances")
+            {
+                <h3> Encumbrances for FUND @fund_code</h3>
+            }
+            else if (Model.detail == "available")
+            {
+                <h3> Available for FUND @fund_code</h3>
+            }
+
+            string tableName = (Model.detail == "all") ? "RDBFundsTableAll" : "RDBFundsTable";
+
+            <table id=@tableName class="table table-striped table-bordered" cellspacing="0" width="100%">
+
+                <thead>
+                    <tr>
+                        <th>FUND</th>
+                        <th>ORGNIZATION</th>
+                        <th>ACCOUNT</th>
+                        <th>ACCT_TITLE</th>
+                        @if (Model.detail == "all" || Model.detail == "budget")
+                        {
+                            <th>BUDGET</th>
+                        }
+                        @if (Model.detail == "all" || Model.detail == "expense")
+                        {
+                            <th>EXPENSE</th>
+                        }
+                        @if (Model.detail == "all" || Model.detail == "encumbrances")
+                        {
+                            <th>ENCUMBRANCES</th>
+                        }
+                        @if (Model.detail == "all" || Model.detail == "available")
+                        {
+                            <th>AVAILABLE</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Funds)
+                    {
+                        string budget = String.Format("{0:C}", item.budget) + (item.budget >= 0 ? " " : "");
+                        string expense = String.Format("{0:C}", item.expense) + (item.expense >= 0 ? " " : "");
+                        string encumbrances = String.Format("{0:C}", item.encumbrances) + (item.encumbrances >= 0 ? " " : "");
+                        string available = String.Format("{0:C}", item.available) + (item.available >= 0 ? " " : "");
+
+                        <tr>
+                            <td>@item.FUND</td>
+                            <td>@item.ORGN</td>
+                            <td>@item.ACCOUNT</td>
+                            <td>@item.ACCT_TITLE</td>
+                            @if (Model.detail == "all" || Model.detail == "budget")
+                            {
+                                <td>@Html.ActionLink(@budget, "Index", "Account", new { fund = item.FUND, account = item.ACCOUNT, transtype = "BUDGET" }, null)</td>
+                            }
+                            @if (Model.detail == "all" || Model.detail == "expense")
+                            {
+                                <td>@Html.ActionLink(@expense, "Index", "Account", new { fund = item.FUND, account = item.ACCOUNT, transtype = "EXPENSE" }, null)</td>
+                            }
+                            @if (Model.detail == "all" || Model.detail == "encumbrances")
+                            {
+                                <td>@Html.ActionLink(@encumbrances, "Index", "Account", new { fund = item.FUND, account = item.ACCOUNT, transtype = "ENCUMBRANCES" }, null)</td>
+                            }
+                            @if (Model.detail == "all" || Model.detail == "available")
+                            {
+                                <td>@available</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else if (ViewBag.Reportstatus != null)
+        {
+            @ViewBag.Reportstatus
+        }
+    </div>
+}
+else
+{
+    <div class="row uah_data_section">
+        <h2>You don't have privilege to access Research Dashboad website. Please contact administrator if there is issue.</h2>
+    </div>
+}

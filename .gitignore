@@ -1,0 +1,11 @@
+/awsexport/bin
+/awsexport/obj
+/awsexport/App.config
+/risdashupload/bin
+/risdashupload/obj
+/risdashupload/App.config
+/risdashboard/bin
+/risdashboard/obj
+/risdashboard/log
+/risdashboard/Web.config
+/packages

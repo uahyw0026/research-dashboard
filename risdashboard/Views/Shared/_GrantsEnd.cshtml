@@ -1,0 +1,47 @@
+﻿@model risdashboard.Models.AwardViewModel
+<div class="isa_warning">
+    <i class="fa fa-warning"></i>
+    @Model.AwardEnds.Count.ToString() out of @Model.Awards.Count.ToString() of Grant Awards for @Model.user.getUserName() Ending within 120 days
+</div>
+
+<table id="RDBAwardEndsTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>ORGN</th>
+            <th>TITLE</th>
+            <th>FUND</th>
+            <th>START DATE</th>
+            <th>END DATE</th>
+            <th>PI</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.AwardEnds)
+        {
+            <tr>
+                <td>
+                    @item.ORGN
+                </td>
+                <td>@item.GRANT_TITLE</td>
+                <td>
+                    @Html.ActionLink(
+                           linkText: item.FUND_CODE,
+                           actionName: "Index",
+                           controllerName: "Funds",
+                           routeValues: new
+                           {
+                               fund = item.FUND_CODE,
+                               detail = "all"
+                           },
+                           htmlAttributes: null
+                           )
+                </td>
+                <td>@item.startDate.ToString("MM/dd/yyyy")</td>
+                <td>@item.endDate.ToString("MM/dd/yyyy")</td>
+                <td>@item.PI</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

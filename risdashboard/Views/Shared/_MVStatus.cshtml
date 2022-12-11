@@ -1,0 +1,25 @@
+﻿@model risdashboard.Models.AdminViewModel
+<h3>Materialized View Refresh Status</h3>
+
+<table id="RDBAwardEndsTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>OWNER</th>
+            <th>MV NAME</th>
+            <th>REFRESH STATUS</th>
+            <th>REFRESH TIME</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MVStatuses)
+        {
+            <tr>
+                <td>@item.owner</td>
+                <td>@item.mview_name</td>
+                <td>@item.last_refresh_type</td>
+                <td>@item.last_refresh_date.ToString("G")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

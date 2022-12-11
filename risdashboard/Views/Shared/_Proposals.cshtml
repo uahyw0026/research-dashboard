@@ -1,0 +1,47 @@
+﻿
+@model risdashboard.Models.AwardViewModel
+
+<table id="RDBProposalsTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>PROPOSAL ID</th>
+            <th>PROPOSAL NUM</th>
+            <th>PROPOSAL TITLE</th>
+            <th>LEAD UNIT</th>
+            <th>PARENT UNIT</th>
+            <th>SPONSORNAME</th>
+            <th>PROPOSAL COST</th>
+            <th>PROPOSAL SUBMIT DATE</th>
+            <th>PROPOSAL START DATE</th>
+            <th>PROPOSAL END DATE</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Proposals)
+        {
+            string nulldate = "01/01/0001";
+            string proposal_cost = String.Format("{0:C}", item.PROPOSALCOST) + (item.PROPOSALCOST >= 0 ? " " : "");
+            string submitdate = item.PROPOSALSUBMITDATE.ToString("MM/dd/yyyy");
+            submitdate = submitdate == nulldate ? "" : submitdate;
+
+            string startdate = item.PROPOSALSTARTDATE.ToString("MM/dd/yyyy");
+            startdate = startdate == nulldate ? "" : startdate;
+
+            string enddate = item.PROPOSALENDDATE.ToString("MM/dd/yyyy");
+            enddate = enddate == nulldate ? "" : enddate;
+
+        <tr>
+            <td>@item.PROPOSALID</td>
+            <td>@item.PROPOSALNUM</td>
+            <td>@item.PROPOSALTITLE</td>
+            <td>@item.LEADUNIT</td>
+            <td>@item.LEADUNITPARENT</td>
+            <td>@item.SPONSORNAME</td>
+            <td>@proposal_cost</td>
+            <td>@submitdate</td>
+            <td>@startdate</td>
+            <td>@enddate</td>
+        </tr>
+        }
+    </tbody>
+</table>

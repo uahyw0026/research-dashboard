@@ -1,0 +1,38 @@
+﻿
+@model risdashboard.Models.AdminViewModel
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.user.isAdmin())
+{
+    Html.RenderPartial("_Navigation", Model.user);
+
+    <div class="row uah_data_section">
+        @if (Model.Deans != null && Model.Deans.Count() > 0)
+        {
+            Html.RenderPartial("_DeanUsers", Model);
+        }
+        @if (Model.NewDean != null)
+        {
+            Html.RenderPartial("_CreateDeanUser", Model);
+        }
+        @if (Model.MVStatuses != null)
+        {
+            Html.RenderPartial("_MVStatus", Model);
+        }
+        @if (ViewBag.Message != null)
+        {
+            @ViewBag.Message
+        }
+    </div>
+    <br />
+    <br />
+}
+else
+{
+    <div class="row uah_data_section">
+        <h2>You don't have privilege to access Research Dashboad website. Please contact administrator if there is issue.</h2>
+    </div>
+}
